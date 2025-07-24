@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tool Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Voice Tool Analyzer</h1>
+    <p>Press the button and say your command (mention "tool" or "device")</p>
+    <button onclick="processTool()">Start Listening</button>
+    <div id="result"></div>
+
+    <script>
+    async function processTool() {
+        document.getElementById("result").textContent = "Listening for your command...";
+
+        const response = await fetch("/process/", {
+            method: "POST"
+        });
+        const data = await response.json();
+        document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+    }
+    </script>
+</body>
+</html>
 
